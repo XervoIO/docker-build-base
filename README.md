@@ -23,7 +23,7 @@ The Modulus build image standard requires there to be an executable somewhere in
 The base build image is not meant to be run directly. It's designed to be inherited by an application specific image, for example the [Node.js build image](https://github.com/onmodulus/docker-build-node).
 
 ```
-FROM: onmodulus/docker-build-base:1.0.0
+FROM: onmodulus/build-base
 
 # Customizations
 
