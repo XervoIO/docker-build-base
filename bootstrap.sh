@@ -23,3 +23,11 @@ apt-get update && apt-get install -y libssl0.9.8 libsqlite-dev \
   # Disable coders that have known vulnerabilities in them
   sed -i '/<policymap>/a <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n  <policy domain="coder" rights="none" pattern="URL" />\n  <policy domain="coder" rights="none" pattern="HTTPS" />\n  <policy domain="coder" rights="none" pattern="MVG" />\n  <policy domain="coder" rights="none" pattern="MSL" />\n  <policy domain="coder" rights="none" pattern="TEXT" />\n  <policy domain="coder" rights="none" pattern="SHOW" />\n  <policy domain="coder" rights="none" pattern="WIN" />\n  <policy domain="coder" rights="none" pattern="PLT" />\n' /usr/local/etc/ImageMagick-7/policy.xml
   ldconfig /usr/local/lib && rm -rf /opt/ImageMagick*
+
+  # Install ffmpeg
+  cd /opt
+  wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
+  tar -xf ffmpeg-*
+  cd ffmpeg-*
+  cp ./* /usr/bin || true #ignore directory warning
+  rm -rf /opt/ffmpeg*
