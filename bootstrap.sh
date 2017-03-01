@@ -8,12 +8,12 @@ TMPDIR=/tmp
 TMP_DIR=/tmp
 
 # Install dependent libraries
-apt-get update && apt-get install -y libssl0.9.8 libsqlite-dev \
+add-apt-repository ppa:mc3man/trusty-media && apt-get update && apt-get install -y libssl0.9.8 libsqlite-dev \
   libexpat1 libexpat1-dev libicu-dev libpq-dev libcairo2-dev \
   libjpeg8-dev libpango1.0-dev libgif-dev libxml2-dev \
   libmagickcore-dev libmagickwand-dev build-essential libkrb5-dev python-dev \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm \
-  ghostscript
+  ghostscript ffmpeg
 
   # Install ImageMagick
   export MAKEFLAGS="-j $(grep -c ^processor /proc/cpuinfo)"
@@ -23,11 +23,3 @@ apt-get update && apt-get install -y libssl0.9.8 libsqlite-dev \
   # Disable coders that have known vulnerabilities in them
   sed -i '/<policymap>/a <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n  <policy domain="coder" rights="none" pattern="URL" />\n  <policy domain="coder" rights="none" pattern="HTTPS" />\n  <policy domain="coder" rights="none" pattern="MVG" />\n  <policy domain="coder" rights="none" pattern="MSL" />\n  <policy domain="coder" rights="none" pattern="TEXT" />\n  <policy domain="coder" rights="none" pattern="SHOW" />\n  <policy domain="coder" rights="none" pattern="WIN" />\n  <policy domain="coder" rights="none" pattern="PLT" />\n' /usr/local/etc/ImageMagick-7/policy.xml
   ldconfig /usr/local/lib && rm -rf /opt/ImageMagick*
-
-  # Install ffmpeg
-  cd /opt
-  wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
-  tar -xf ffmpeg-*
-  cd ffmpeg-*
-  cp ./* /usr/bin || true #ignore directory warning
-  rm -rf /opt/ffmpeg*
